@@ -101,7 +101,12 @@ extension ViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "newsTitleCell", for: indexPath) as! NewsTitleCell
         
 //        cell.textLabel?.text = self.things[indexPath.item].title! + "dsadsad"
-        cell.lblDescription?.text = self.things[indexPath.item].title! + "dsadsad"
+        
+        if self.things[indexPath.item].title != nil {
+            cell.lblDescription?.text = self.things[indexPath.item].title!
+        } else {
+            cell.lblDescription?.text = "Title not found"
+        }
 
         if self.things[indexPath.item].urlToImage != nil {
             cell.imgNews.setImageFromUrl(ImageURL: self.things[indexPath.item].urlToImage! )
