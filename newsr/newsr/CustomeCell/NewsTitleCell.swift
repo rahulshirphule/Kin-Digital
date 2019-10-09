@@ -36,13 +36,17 @@ extension UIView {
     
     // OUTPUT 1
     func dropShadow(scale: Bool = true) {
-        layer.shadowColor = UIColor.black.cgColor
-        layer.shadowOpacity = 1
-        layer.shadowOffset = .zero
-        layer.shadowRadius = 2
-        layer.shadowPath = UIBezierPath(rect: self.bounds).cgPath
+        
+        layer.shadowColor = UIColor.gray.cgColor
+        layer.shadowOpacity = 0.55
+        
+        layer.shadowPath = UIBezierPath(rect: layer.bounds).cgPath
         layer.shouldRasterize = true
          layer.rasterizationScale = 1
+
+        layer.shadowOffset = CGSize(width: 0, height: 3)
+        layer.shadowRadius = 1.5
+        layer.masksToBounds = false
 
     }
     
@@ -53,9 +57,10 @@ extension UIView {
         layer.shadowOpacity = opacity
         layer.shadowOffset = offSet
         layer.shadowRadius = radius
-        
+
         layer.shadowPath = UIBezierPath(rect: self.bounds).cgPath
         layer.shouldRasterize = true
         layer.rasterizationScale = scale ? UIScreen.main.scale : 1
+
     }
 }

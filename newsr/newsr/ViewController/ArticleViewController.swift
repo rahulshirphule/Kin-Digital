@@ -58,7 +58,7 @@ class ArticleViewController: UIViewController,UITableViewDataSource, UITableView
         cell.img.setImageFromUrl(ImageURL: self.images[indexPath.item])
         
         cell.selectionStyle = .none;
-//        cell.containerView.dropShadow();
+        cell.containerView.dropShadow();
         cell.containerView!.layer.cornerRadius = 10;
         
         return cell
@@ -71,15 +71,11 @@ class ArticleViewController: UIViewController,UITableViewDataSource, UITableView
         self.navigationController?.pushViewController(newsView, animated: true);
     }
     
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+        UIView.animate(withDuration: 0.4) {
+            cell.transform = CGAffineTransform.identity
+        }
     }
-    */
-
+    
 }

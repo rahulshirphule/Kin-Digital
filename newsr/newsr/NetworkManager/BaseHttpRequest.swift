@@ -13,7 +13,7 @@ class BaseHttpRequest: NSObject {
     override init() {
     }
     
-      func getDataFromServer(baseUrl: String,_ completion: @escaping ([Article]?) -> ()) {
+    func getDataFromServer(baseUrl: String,forView: UIViewController,_ completion: @escaping ([Article]?) -> ()) {
         
         if Reachability.isConnectedToNetwork(){
             let session = URLSession.shared
@@ -24,6 +24,8 @@ class BaseHttpRequest: NSObject {
                 let decoder = JSONDecoder()
                 if(error != nil) {
                     print(error.debugDescription);
+                    let alert = Alerts();
+                    alert.showMessage(withTitle: "Alert",withText: error!.localizedDescription,forView: forView);
                     completion(nil)
                 } else {
                     let json = try? JSONSerialization.jsonObject(with: data!, options: [])
@@ -41,7 +43,9 @@ class BaseHttpRequest: NSObject {
             })
             task.resume();
         }else{
-            
+            let alert = Alerts();
+            alert.showMessage(withTitle: "Alert",withText: "No internet connection",forView: forView);
+            completion(nil)
         }
         
     }

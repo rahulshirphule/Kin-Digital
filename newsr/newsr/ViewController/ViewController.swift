@@ -36,7 +36,7 @@ class ViewController: UITableViewController {
         
         self.showIndicator(withTitle: "Loading...", and: "getting list of articles")
         let url = "https://newsapi.org/v2/everything?q="+self.article+"&apiKey=9ff1fdcc97804ae0861c05b1f7696fee"
-        baseRequest.getDataFromServer(baseUrl: url){ (data)
+        baseRequest.getDataFromServer(baseUrl: url,forView: self){ (data)
             in
             DispatchQueue.main.async {
                 self.hideIndicator()
@@ -110,6 +110,7 @@ extension ViewController {
 
         if self.things[indexPath.item].urlToImage != nil {
             cell.imgNews.setImageFromUrl(ImageURL: self.things[indexPath.item].urlToImage! )
+            cell.imgNews.layer.cornerRadius = 7;
         }
 
         cell.selectionStyle = .none;
@@ -117,6 +118,13 @@ extension ViewController {
         cell.containerView!.layer.cornerRadius = 10;
         
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+        UIView.animate(withDuration: 0.4) {
+            cell.transform = CGAffineTransform.identity
+        }
     }
     
 }

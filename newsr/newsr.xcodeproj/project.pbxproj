@@ -17,6 +17,7 @@
 		4C6DB583234CABE4006A729E /* ArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6DB582234CABE4006A729E /* ArticleViewController.swift */; };
 		4C6DB5BC234CB3F4006A729E /* ArticleViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6DB5BA234CB3F4006A729E /* ArticleViewCell.swift */; };
 		4C6DB5BD234CB3F4006A729E /* ArticleViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C6DB5BB234CB3F4006A729E /* ArticleViewCell.xib */; };
+		4C6DB5C0234E068D006A729E /* Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6DB5BF234E068D006A729E /* Alerts.swift */; };
 		C5D33EA62338D66B00A183B6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D33EA52338D66B00A183B6 /* AppDelegate.swift */; };
 		C5D33EA82338D66B00A183B6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D33EA72338D66B00A183B6 /* ViewController.swift */; };
 		C5D33EAB2338D66B00A183B6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5D33EA92338D66B00A183B6 /* Main.storyboard */; };
@@ -57,6 +58,7 @@
 		4C6DB582234CABE4006A729E /* ArticleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleViewController.swift; sourceTree = "<group>"; };
 		4C6DB5BA234CB3F4006A729E /* ArticleViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleViewCell.swift; sourceTree = "<group>"; };
 		4C6DB5BB234CB3F4006A729E /* ArticleViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArticleViewCell.xib; sourceTree = "<group>"; };
+		4C6DB5BF234E068D006A729E /* Alerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alerts.swift; sourceTree = "<group>"; };
 		C5D33EA22338D66B00A183B6 /* newsr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = newsr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5D33EA52338D66B00A183B6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C5D33EA72338D66B00A183B6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -140,9 +142,26 @@
 		4C6DB581234CABBF006A729E /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				C5D33EA72338D66B00A183B6 /* ViewController.swift */,
 				4C6DB582234CABE4006A729E /* ArticleViewController.swift */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		4C6DB5BE234E0667006A729E /* Alerts */ = {
+			isa = PBXGroup;
+			children = (
+				4C6DB5BF234E068D006A729E /* Alerts.swift */,
+			);
+			path = Alerts;
+			sourceTree = "<group>";
+		};
+		4C6DB5C1234E07F1006A729E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C5D33EA92338D66B00A183B6 /* Main.storyboard */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		C5D33E992338D66B00A183B6 = {
@@ -168,14 +187,14 @@
 		C5D33EA42338D66B00A183B6 /* newsr */ = {
 			isa = PBXGroup;
 			children = (
+				4C6DB5C1234E07F1006A729E /* Views */,
+				4C6DB5BE234E0667006A729E /* Alerts */,
 				4C6DB581234CABBF006A729E /* ViewController */,
 				4C6DB57C234C8518006A729E /* NetworkManager */,
 				4C6DB574234C83A9006A729E /* Spinner */,
 				4C6DB56F234BE192006A729E /* CustomeCell */,
 				4C6DB56C234BD8B6006A729E /* Model */,
 				C5D33EA52338D66B00A183B6 /* AppDelegate.swift */,
-				C5D33EA72338D66B00A183B6 /* ViewController.swift */,
-				C5D33EA92338D66B00A183B6 /* Main.storyboard */,
 				C5D33EAF2338D66E00A183B6 /* Assets.xcassets */,
 				C5D33EB12338D66E00A183B6 /* LaunchScreen.storyboard */,
 				C5D33EB42338D66E00A183B6 /* Info.plist */,
@@ -346,6 +365,7 @@
 				4C6DB577234C83D1006A729E /* VDSCircleAnimation.swift in Sources */,
 				4C6DB583234CABE4006A729E /* ArticleViewController.swift in Sources */,
 				C5D33EAE2338D66B00A183B6 /* newsr.xcdatamodeld in Sources */,
+				4C6DB5C0234E068D006A729E /* Alerts.swift in Sources */,
 				4C6DB57B234C8501006A729E /* MBProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
