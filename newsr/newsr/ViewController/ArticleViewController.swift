@@ -11,7 +11,7 @@ import UIKit
 class ArticleViewController: UIViewController,UITableViewDataSource, UITableViewDelegate  {
 
     var things = ["apple","swift","bitcoin","domains"]
-    var images = ["https://techcrunch.com/wp-content/uploads/2019/09/20190910173600_125767.jpg","https://i.kinja-img.com/gawker-media/image/upload/s--MI8gM3sK--/c_fill,fl_progressive,g_center,h_900,q_80,w_1600/r35teq2mwsq97oa7svlh.jpg","https://techcrunch.com/wp-content/uploads/2019/09/DSCF7794.jpg","https://i.kinja-img.com/gawker-media/image/upload/s--MI8gM3sK--/c_fill,fl_progressive,g_center,h_900,q_80,w_1600/r35teq2mwsq97oa7svlh.jpg"]
+    var images = ["https://techcrunch.com/wp-content/uploads/2019/09/20190910173600_125767.jpg","https://i.kinja-img.com/gawker-media/image/upload/s--MI8gM3sK--/c_fill,fl_progressive,g_center,h_900,q_80,w_1600/r35teq2mwsq97oa7svlh.jpg","https://techcrunch.com/wp-content/uploads/2019/09/20190910173600_125767.jpg","https://i.kinja-img.com/gawker-media/image/upload/s--MI8gM3sK--/c_fill,fl_progressive,g_center,h_900,q_80,w_1600/r35teq2mwsq97oa7svlh.jpg"]
  
     @IBOutlet var btnAddKin: UIButton!
     
@@ -20,16 +20,17 @@ class ArticleViewController: UIViewController,UITableViewDataSource, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.title = "Kin Digi"
         btnAddKin.layer.cornerRadius = 10;
-//        things.append("apple");
-//        things.append("swift");
-//        things.append("bitcoin");
-//        things.append("domains");
         
         self.tableView.register(UINib.init(nibName: "ArticleViewCell", bundle: nil), forCellReuseIdentifier: "articleCell")
         self.tableView.separatorStyle = .none
         
         // Do any additional setup after loading the view.
+        //Shoule be fix: This is hack updating the list to draw proper shadow
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
+            self.tableView.reloadData()
+        })
     }
     
 
@@ -60,6 +61,8 @@ class ArticleViewController: UIViewController,UITableViewDataSource, UITableView
         cell.selectionStyle = .none;
         cell.containerView.dropShadow();
         cell.containerView!.layer.cornerRadius = 10;
+        
+        cell.img.layer.cornerRadius = 15;
         
         return cell
     }

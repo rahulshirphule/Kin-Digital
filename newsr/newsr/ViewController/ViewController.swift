@@ -13,6 +13,9 @@ class ViewController: UITableViewController {
 
     var things = [Article]()
     var article: String!;
+    var isDataLoading: Bool = false;
+    var pageNo = 1;
+    var pageSize = 20;
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,10 +35,20 @@ class ViewController: UITableViewController {
         self.tableView.register(UINib.init(nibName: "NewsTitleCell", bundle: nil), forCellReuseIdentifier: "newsTitleCell")
         self.tableView.separatorStyle = .none
         
+        getArticleData();
+    
+    }
+    
+    func getArticleData() {
         let baseRequest = BaseHttpRequest();
         
-        self.showIndicator(withTitle: "Loading...", and: "getting list of articles")
-        let url = "https://newsapi.org/v2/everything?q="+self.article+"&apiKey=9ff1fdcc97804ae0861c05b1f7696fee"
+        DispatchQueue.main.async {
+            self.showIndicator(withTitle: "Loading...", and: "getting list of articles")
+        }
+        
+        let baseUrl = "https://newsapi.org/v2/everything?q=";
+        
+        let url = "\(baseUrl)\(self.article ?? "")" + "&apiKey=9ff1fdcc97804ae0861c05b1f7696fee&pageSize=\(self.pageSize)&page=\(self.pageNo)";
         baseRequest.getDataFromServer(baseUrl: url,forView: self){ (data)
             in
             DispatchQueue.main.async {
@@ -46,38 +59,15 @@ class ViewController: UITableViewController {
                 DispatchQueue.main.async {
                     self.things = responseData!;
                     self.tableView.reloadData()
+                    //Shoule be fix: This is hack updating the list to draw proper shadow
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+                        self.tableView.reloadData()
+                    })
                 }
             } else {
                 print("something is wrong")
             }
         };
-        
-//        let decoder = JSONDecoder()
-//        if let url = URL(string: "https://newsapi.org/v2/everything?q=swift&apiKey=9ff1fdcc97804ae0861c05b1f7696fee") {
-//            URLSession.shared.dataTask(with: url) { data, response, error in
-//                guard let data = data else {
-//                    return
-//                }
-//                do {
-//                    struct Articles : Codable{let articles:[Article]}
-//
-//                    let parsed = try decoder.decode(Articles.self, from: data)
-//                    self.things = parsed.articles
-//                    for p in parsed.articles {
-//                        print(p.title)
-//                        DispatchQueue.main.async {
-//                            self.tableView.reloadData()
-//                        }
-//                    }
-//                } catch {
-//                    print("OOPS")
-//                }
-//            }.resume()
-//        };
-        
-        //brokeparsedData = decoder.decode(Article.self, from: YourJsonData)
-        //print(self.parsed)
-
     }
 
 
@@ -110,11 +100,11 @@ extension ViewController {
 
         if self.things[indexPath.item].urlToImage != nil {
             cell.imgNews.setImageFromUrl(ImageURL: self.things[indexPath.item].urlToImage! )
-            cell.imgNews.layer.cornerRadius = 7;
+            cell.imgNews.layer.cornerRadius = 25;
         }
 
         cell.selectionStyle = .none;
-//        cell.containerView.dropShadow();
+        cell.containerView.dropShadow();
         cell.containerView!.layer.cornerRadius = 10;
         
         return cell
@@ -125,6 +115,29 @@ extension ViewController {
         UIView.animate(withDuration: 0.4) {
             cell.transform = CGAffineTransform.identity
         }
+    }
+    
+    override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        
+        print("scrollViewDidEndDragging")
+        if ((tableView.contentOffset.y + tableView.frame.size.height) >= tableView.contentSize.height)
+        {
+            if !isDataLoading{
+                isDataLoading = true
+                self.pageNo=self.pageNo+1
+//                self.offset=self.limit * self.pageNo
+//                loadCallLogData(offset: self.offset, limit: self.limit)
+                getArticleData()
+                
+            }
+        }
+        
+    }
+    
+    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        
+        print("scrollViewWillBeginDragging")
+        isDataLoading = false
     }
     
 }

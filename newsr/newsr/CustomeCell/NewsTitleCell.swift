@@ -45,7 +45,7 @@ extension UIView {
          layer.rasterizationScale = 1
 
         layer.shadowOffset = CGSize(width: 0, height: 3)
-        layer.shadowRadius = 1.5
+        layer.shadowRadius = 8
         layer.masksToBounds = false
 
     }
